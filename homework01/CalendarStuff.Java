@@ -76,9 +76,9 @@ public class CalendarStuffEmpty {
    * @return         boolean which is true if the parameter is a leap year
    */
    public static boolean isLeapYear( long year ){
-     if (year%4 == 0) {
-        if (year%100 == 0) {
-           if (year%400 == 0) {
+     if (year % 4 == 0) {
+        if (year % 100 == 0) {
+           if (year % 400 == 0) {
               return true;
             }
             else{
@@ -130,9 +130,10 @@ public class CalendarStuffEmpty {
    public static boolean dateEquals( long month1, long day1, long year1, long month2, long day2, long year2 ) {
       if ((day1 == day2) && (month1 == month2) && (year1 == year2)) {
          return true;
-      }
-      return false;
-   }
+	      } else {
+	    	      return false;
+	      }
+	   }
 
 
   /**
@@ -146,7 +147,7 @@ public class CalendarStuffEmpty {
    * @return          int    -1/0/+1 if first date is less than/equal to/greater than second
    */
    public static int compareDate( long month1, long day1, long year1, long month2, long day2, long year2 ) {
-       if ( year1 > year2 ) {
+       if (year1 > year2) {
            return 1;
        } else if ((month1 > month2) && (year1 == year2)) {
            return 1;
@@ -156,6 +157,8 @@ public class CalendarStuffEmpty {
            return 0;
        }
        return -1;
+
+
    }
 
 
@@ -169,12 +172,12 @@ public class CalendarStuffEmpty {
    *         be decremented to make the appropriate index value
    */
       public static boolean isValidDate( long month, long day, long year ) {
-
-      if ((daysInMonth(month, year) >= day) && (day != 0)) {
-         return true;
-      }
-      return false;
-   }
+          if ((daysInMonth(month, year) >= day) && (day != 0)) {
+             return true;
+	        } else {
+	    	     return false;
+	        }
+	   }
 
   /**
    * A method to return a string version of the month name
@@ -208,61 +211,10 @@ public class CalendarStuffEmpty {
    * @param    year2  long   containing four-digit year
    * @return          long   count of total number of days
    */
-   public static long daysBetween( int month1, long day1, long year1, int month2, long day2, long year2 ) {
-     long dayCount = 0;
-
-   if ((year1 < year2) || ((year1 == year2) && (month2 > month1)) || ((year1 == year2) && (month1 == month2) && (day2 > day1))) {
-      for (long d = 0; !((year1 == year2) && (month1 == month2) && (day1 == day2)); d++) {
-        if ((month1 == 2) && (day1 == 28) && (CalendarStuff.isLeapYear(year1))) {
-          day1 = 1;
-          month1 = 3;
-          dayCount += 2;
-        } else if (day1 < days[month1 - 1]) {
-            day1++;
-            dayCount++;
-          } else if ((day1 == days[month1 - 1]) && (month1 <12)) {
-            day1 = 1;
-            month1++;
-            dayCount++;
-          } else if ((day1 < 31) && (month1 == 12)) {
-            day1++;
-            dayCount++;
-          } else if ((month1 == 12) && (day1 == 31)) {
-            year1++;
-            day1 = 1;
-            month1 = 1;
-            dayCount++;
-          } }
-        return dayCount;
-
-  } else if ((year2 < year1) || ((year1 == year2) && (month1 > month2)) || ((year1 == year2) && (month1 == month2) && (day2 < day1))) {
-    for (long d = 0;!((year1 == year2) && (month1 == month2) && (day1 == day2)); d++) {
-      if ((month2 == 2) && (day2 == 28) && (CalendarStuff.isLeapYear(year2))) {
-        day2 = 1;
-        month2 = 3;
-        dayCount += 2;
-      } else if (day2 < days[month2 - 1]) {
-          day2++;
-          dayCount++;
-        } else if ((day2 == days[month2 - 1]) && (month2 <12)) {
-          day2 = 1;
-          month2++;
-          dayCount++;
-        } else if ((day2 < 31) && (month2 == 12)) {
-          day2++;
-          dayCount++;
-        } else if ((month2 == 12) && (day2 == 31)) {
-          year2++;
-          day2 = 1;
-          month2 = 1;
-          dayCount++;
-        } }
-    return dayCount;
-
-  } else if ((year1 == year2) && (month1 == month2) && (day1 == day2)) {
-     return dayCount;
+   public static long daysBetween( long month1, long day1, long year1, long month2, long day2, long year2, alldays) { //alldays continues to not work and show error
+      return (Math.abs(alldays(day1, month1, year1)-alldays(day2, month2, year2)));
    }
 
-
-    return dayCount;
 }
+
+
