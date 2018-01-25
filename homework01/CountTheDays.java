@@ -6,5 +6,5 @@ public static void main ( String args[] ) {
       long day2   = Long.parseLong(args[4]);
       long year2  = Long.parseLong(args[5]);
       long days = CalendarStuff.daysBetween( month1, day1, year1, month2, day2, year2 );
-           System.out.println(days + "\n days between the dates\n");
+           System.out.println(days + "\n days between the dates\n"); //possibly alldays to count leap year...
 }
