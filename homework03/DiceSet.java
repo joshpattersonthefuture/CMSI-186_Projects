@@ -142,8 +142,6 @@ public class DiceSet {
    * A little test main to check things out
    */
    public static void main( String[] args ) {
-      System.out.println( "\n Hello from the Dice Set class main method!\n Enter a number for the dice in the set and number of sides in the command line\n" );
-
       DiceSet d1 = new DiceSet(4,8);
       DiceSet d2 = new DiceSet(6,2);
       d1.roll();
