@@ -111,11 +111,11 @@ public class Die {
    * A little test main to check things out
    */
    public static void main( String[] args) {
-    Die d1 = new Die(1);
+    // Die d1 = new Die(1);   NOTE: THIS NEEDS TO BE IN A TRY-CATCH BLOCK TO KEEP FROM BLOWING UP
     Die d4 = new Die(4);
     Die d7 = new Die(7);
 
-    System.out.println("Test of rolling dice 1" + d1.roll());
+    // System.out.println("Test of rolling dice 1" + d1.roll());
 
     System.out.println("Test of pip count of dice 4" + d4.getValue());
 

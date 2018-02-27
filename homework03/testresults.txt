@@ -1,0 +1,4 @@
+Test of pip count of dice 41
+Test of string result of dice 4[1]
+Test of pip count of dice 41
+Test of string result of dice 4[1]

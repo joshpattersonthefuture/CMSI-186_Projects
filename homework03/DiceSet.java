@@ -34,7 +34,8 @@
  *  @version 1.1.0  2017-02-17  B.J. Johnson    Filled in method code
  *  @version 1.2.0  2017-02-21  Josh Patterson  Methods Filled in
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-public class Die {
+// public class Die {   NOTE: THIS IS WRONG; MUST MATCH THE FILE NAME
+public class DiceSet {
 
   /**
    * private instance data
@@ -50,7 +51,8 @@ public class Die {
    * @throws       IllegalArgumentException
    * Note: parameter must be checked for validity; invalid value must throw "IllegalArgumentException"
    */
-   public Die( int nSides ) {
+   // public Die( int nSides ) {   NOTE: THIS IS WRONG; MUST MATCH THE FILE NAME - ALSO NEEDS TWO ARGS
+   public DiceSet( int nSides ) {
       if ( nSides < MINIMUM_SIDES ) {
         throw new IllegalArgumentException( "\n Enter atleast 4" );
       } else {
@@ -104,18 +106,19 @@ public class Die {
    * @return String representation of this Die
    */
    public static String toString( Die d ) {
-     String dieString = "[" + d.pips + "]";
+     // String dieString = "[" + d.pips + "]";   NOTE: THIS IS WRONG; "pips" IS PRIVATE.  USE "getValue()"
+     String dieString = "[" + d.getValue() + "]";
     return dieString;
   }
   /**
    * A little test main to check things out
    */
    public static void main( String[] args) {
-    Die d1 = new Die(1);
+    // Die d1 = new Die(1);   NOTE: THIS NEEDS TO BE IN A TRY-CATCH BLOCK TO KEEP FROM BLOWING UP
     Die d4 = new Die(4);
     Die d7 = new Die(7);
 
-    System.out.println("Test of rolling dice 1" + d1.roll());
+    // System.out.println("Test of rolling dice 1" + d1.roll());
 
     System.out.println("Test of pip count of dice 4" + d4.getValue());
 
