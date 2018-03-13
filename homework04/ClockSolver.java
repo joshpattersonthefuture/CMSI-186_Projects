@@ -32,11 +32,11 @@ public ClockSolver() {
 
 public void handleInitialArguments( String args[] ) {
 
-System.out.println( "\n   Hello world, from the ClockSolver program!!\n\n" ) ;
+System.out.println( "\n  Welcome to Clocksolver! \n\n" ) ;
     if( 0 == args.length ) {
-       System.out.println( "   Sorry you must enter at least one argument\n" +
+       System.out.println( "   Enter at least one argument\n" +
                              "   Usage: java ClockSolver <angle> [timeSlice]\n" +
-                             "   Please try again..........." );
+                             "   Please try again" );
        System.exit( 1 );
      }
 
@@ -58,10 +58,8 @@ public static void main( String args[] ) {
       cse.handleInitialArguments( args );
       time = Double.parseDouble(args[1]);
 
-  /*Tests using arguments */
-
       if (args.length == 1) {
-        while (clock.tick(60) <= 43200) {
+        while (clock.tick(DEFAULT_TIME_SLICE_SECONDS) <= 43200) {
           if ((angle - 2 < clock.getHourHandAngle()) && (angle + 2 > clock.getHourHandAngle())) {
             System.out.println(clock.toString());
           }
