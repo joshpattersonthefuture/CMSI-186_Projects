@@ -1,0 +1,70 @@
+.
+.
+one compile error:
+
+ClockSolver.java:62: error: non-static variable DEFAULT_TIME_SLICE_SECONDS cannot be referenced from a static context
+        while (clock.tick(DEFAULT_TIME_SLICE_SECONDS) <= 43200) {
+                          ^
+1 error
+
+I repaired this error by putting "cse" in front of the constant name, since it is an instance variable
+recompiled OK
+.
+.
+gets exceptions when running "java Clock" because the code in main() is not catching the exception that
+   is being thrown on the hard-coded out of range errors.  The very first one is out of range, and it
+   throws an exception which is not caught, cauing the program to stop right there.  The remaining
+   code in the Clock class main() is never executed.
+
+
+  Welcome to Clocksolver! 
+
+
+
+  Welcome to Clocksolver! 
+
+
+
+  Welcome to Clocksolver! 
+
+
+
+  Welcome to Clocksolver! 
+
+
+
+  Welcome to Clocksolver! 
+
+
+
+  Welcome to Clocksolver! 
+
+
+
+  Welcome to Clocksolver! 
+
+
+
+  Welcome to Clocksolver! 
+
+
+
+  Welcome to Clocksolver! 
+
+
+
+  Welcome to Clocksolver! 
+
+
+
+  Welcome to Clocksolver! 
+
+
+
+  Welcome to Clocksolver! 
+
+
+
+  Welcome to Clocksolver! 
+
+

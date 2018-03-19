@@ -1,0 +1,48 @@
+
+Evaluation for homework 04: Clock Solver
+
+Clock and ClockSolver programs
+Includes running Clock main to observe tests
+Includes running automated ClockSolver tests
+   View testH$4.bat to see test parameters used
+===============================================
+
+A total of one point each for the following:
+
+class Clock             : Exists, coding style acceptable   -  1 point
+Constructor             : Freebie, since not really needed  -  1 point
+tick                    : works                             -  1 point
+getHourHandAngle        : works                             -  1 point
+getMinuteHandAngle      : works                             -  1 point
+getHandAngle            : works                             -  1 point
+getTotalSeconds         : works                             -  1 point
+toString                : works                             -  1 point
+main exists             : Exists                            -  1 point
+Test Code               : Contains some method test code    -  1 point
+   the way this is structured, you don't catch the exceptions that are thrown
+     so the program will never test more than the first attenpt at calling
+     the Clock constructor.  I would have to take off 1/2 point, but you
+     wrote a bunch of nice code.....  if you have questions about this,
+     feel free to ask me about it
+
+class ClockSolver       : Exists, coding style acceptable   -  1 point
+Constructor             : Exists, works properly            -  1 point
+HandleInitialArguments  : works                             -  0 point (0/7)
+   didn't handle situation with no arguments; throws ArrayIndexOutOfBoundsException
+   didn't handle any of the bogus argument situations; see "clocktestcases.bat"
+main exists             : works                             -  1 point
+works as advertised     : passes all tests in the series    -  4.5 points
+   none of the test cases got any output, other than "Welcome to ClockSolver"
+   there is code, though, so I'm giving you 1/2 credit
+
+Files in Git            : two files required                -  2 points
+Coding Style overall    : coding style acceptable           -  1 point
+
+
+Total 19.50 out of 27 = 72.22% which is a C
+
+If you have questions about this material or would like some assistance, please
+feel free to come by during office hours or make an appointment using my
+youcanbookme site.
+
+

@@ -7,7 +7,7 @@
  *  Description   :  This class provides a bunch of methods which may be useful for the ClockSolver class
  *                   for Homework 4, part 1.  Includes the following:
   *
- *  Notes         :  None 
+ *  Notes         :  None
  *  Warnings      :  None
  *  Exceptions    :  IllegalArgumentException when the input arguments are "hinky"
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -18,7 +18,7 @@
  *  @version 1.0.0  2017-02-28  B.J. Johnson  Initial writing and release
  *  @version 1.1.0  2017-03-13  Josh Patterson  Methods Filled
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
- 
+
 import java.util.*;
 public class ClockSolver {
 
@@ -40,7 +40,7 @@ System.out.println( "\n  Welcome to Clocksolver! \n\n" ) ;
        System.exit( 1 );
      }
 
-      
+
 Clock clock = new Clock(0,0,0);
      clock.validateAngleArg(args[0]);
       if (args.length == 2) {
@@ -49,7 +49,7 @@ Clock clock = new Clock(0,0,0);
    }
 
 public static void main( String args[] ) {
-	 double angle = Double.parseDouble(args[0]);
+    double angle = Double.parseDouble(args[0]);
      double time;
 
       ClockSolver cse = new ClockSolver();
@@ -59,11 +59,11 @@ public static void main( String args[] ) {
       time = Double.parseDouble(args[1]);
 
       if (args.length == 1) {
-        while (clock.tick(DEFAULT_TIME_SLICE_SECONDS) <= 43200) {
+        while (clock.tick(cse.DEFAULT_TIME_SLICE_SECONDS) <= 43200) {
           if ((angle - 2 < clock.getHourHandAngle()) && (angle + 2 > clock.getHourHandAngle())) {
             System.out.println(clock.toString());
           }
         }
-      }    
-	  }
+      }
+     }
   }
