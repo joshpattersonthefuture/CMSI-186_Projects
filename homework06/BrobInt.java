@@ -110,16 +110,17 @@ public class BrobInt{
 
        integers[i] = temp % 10;
        carry = temp / 10;
-     }
+    }
 
      if (carry == 1){
        integers[newSize - 1] = 1;
      } else {
        integers[newSize - 1] = 0;
-     }
+       }
 
-     return new BrobInt(Arrays.toString(integers));
+     return new BrobInt(integers);
    }
+
 
    public BrobInt subtractInt( BrobInt gint ) {
      int [] integers = new int[BrobSize];
