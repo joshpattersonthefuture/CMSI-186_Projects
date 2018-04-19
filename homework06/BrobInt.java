@@ -72,8 +72,7 @@ public BrobInt reverser() {
      return new BrobInt(sReverse);
   }
 
-
-   public static BrobInt reverser( BrobInt gint ) {
+public static BrobInt reverser( BrobInt gint ) {
      StringBuffer sb = new StringBuffer(gint.toString());
      String sReverse = sb.reverse().toString();
      return new BrobInt(sReverse);
