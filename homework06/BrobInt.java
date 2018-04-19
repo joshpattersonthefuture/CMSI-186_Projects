@@ -1,3 +1,4 @@
+ 
  import java.io.IOException;
  import java.util.Scanner;
  import java.util.Random;
@@ -224,13 +225,13 @@ public class BrobInt{
          throw new UnsupportedOperationException( "\n         Sorry, that operation is not yet implemented." );
  }
 
- public boolean equals( Object x ) {
-         if (x instanceof BrobInt) {
-            BrobInt y = (BrobInt) x;
-            if (y.BrobSize  != this.BrobSize) {
+ public boolean equals( Object gint ) {
+         if (gint instanceof BrobInt) {
+            BrobInt equal = (BrobInt) gint;
+            if (equal.BrobSize  != this.BrobSize) {
                return false;
             }
-            return this.compareTo(y) == 0;
+            return this.compareTo(equal) == 0;
          }
          return false;
  }
@@ -273,4 +274,3 @@ public class BrobInt{
 
        System.exit( 0 );
     }
- }
