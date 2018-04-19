@@ -1,4 +1,4 @@
-import java.io.IOException;
+ import java.io.IOException;
  import java.util.Scanner;
  import java.util.Random;
  import java.util.Arrays;
@@ -18,67 +18,55 @@ public class BrobInt{
    public static final BrobInt TEN      = new BrobInt( "10" );
 
    private String internalValue = "";
-   private byte   sign          = 0;
    private byte[] byteVersion   = null;
    private String sBrobInt;
    private String reverse = "";
    private int[] intArray;
-   private int BrobSign;
-   private int[] BrobInt;
-   private int BrobSize;
-   private int remainder;
-   private int compare;
    private String sReverse;
    private String intString = "";
+   private int[] Brob;
+   private int BrobSize;
+   private int BrobSign;
    private int[] result;
    private int temp = 0;
    private int carry = 0;
    private int start = 0;
    private boolean Equals = false;
+   private int index = 0;
 
+public BrobInt( int[] gint ) {
+ Brob = gint;
+}
 
-   public BrobInt( String value ) {
-     intArray = new int[BrobSize];
-
-        if (value.charAt(0) == '+') {
-          sign = 0;
-          intArray = new int [value.length() - 1];
-          for (int i = 1; i <value.length(); i ++) {
-            intArray[start] = Character.getNumericValue(value.charAt(i));
-            start++;
-          }
-        } else if (value.charAt(0) == '-') {
-          sign = 1;
-          intArray = new int [value.length() - 1];
-          for (int i = 1; i <value.length(); i ++) {
-            intArray[start] = Character.getNumericValue(value.charAt(i));
-            start++;
-          }
-        } else{
-          intArray = new int [value.length()];
-          for (int i = 0; i <value.length(); i ++) {
-            intArray[start] = Character.getNumericValue(value.charAt(i));
-            start++;
-          }
+public BrobInt( String gint ) {
+     if (gint.equals("1")) {
+       Brob = new int[3];
+       BrobSize= 1;
+       Brob[0] = 1;
+       BrobSign = Brob[Brob.length-1] = 1;
+        return;
+     }
+    if (gint.equals("0")) {
+       Brob = new int[1];
+       BrobSize = 1;
+       Brob[0] = 0;
+       BrobSign = 0;
+        return;
+  }
+       Brob = new int[gint.length()+2];
+       BrobSize = Brob.length-2;
+       BrobSign = Brob[Brob.length-1] = 1;
+       Brob[Brob.length-2] = 0;
+         for (int i = 0; i <= gint.length()-1; i++) {
+            if(gint.charAt(gint.length()-1-i) == '-') {
+               BrobSign = Brob[Brob.length-1] = -1;
+               break;
         }
-      }
-
-    public BrobInt( int[] value ) {
-        intArray = value;
+       Brob[i] = Integer.parseInt(gint.charAt(gint.length()-1-i)+"");
          }
+}
 
-
-   public boolean validateDigits() {
-     for(byte i : byteVersion) {
-        if(i > 9 || i < 0) {
-        }
-        return false;
-      }
-      return true;
- }
-
-
-   public BrobInt reverser() {
+public BrobInt reverser() {
      StringBuffer sb = new StringBuffer(toString());
      sReverse = sb.reverse().toString();
      return new BrobInt(sReverse);
@@ -91,224 +79,196 @@ public class BrobInt{
      return new BrobInt(sReverse);
  }
 
-   public BrobInt addInt( BrobInt gint ) {
+///signs still confuse program and add/subtract as if theres only one negative always
+public BrobInt signCheck() {
+  BrobSign = Brob[Brob.length-1]
+  =Brob[Brob.length-1]* -1;
+  return this;
+}
 
-   int newSize = toString().length();
-     int [] integers = new int[newSize];
-
-     for (int i = 0; i < newSize; i++) {
-
-       if (i < BrobSize ) {
-         temp += intArray[i];
-       }
-
-       if (i <gint.BrobSize) {
-         temp +=gint.intArray[i];
-       }
-
-       temp += carry;
-
-       integers[i] = temp % 10;
-       carry = temp / 10;
-    }
-
-     if (carry == 1){
-       integers[newSize - 1] = 1;
-     } else {
-       integers[newSize - 1] = 0;
-       }
-
-     return new BrobInt(integers);
-   }
-
-
-   public BrobInt subtractInt( BrobInt gint ) {
-     int [] integers = new int[BrobSize];
-   for (int i = 0; i < BrobSize; i++) {
-     int temp = intArray[i];
-     if (i <gint.BrobSize) {
-     temp -=gint.intArray[i];
-     }
-     temp -= carry;
-     carry = 0;
-     if (temp < 0) {
-       temp = temp + 10;
-       carry = 1;
-     }
-     integers[i] = temp;
-   }
-   return new BrobInt(Arrays.toString(integers));
- }
-
-
-
- public BrobInt signChanger() {
-     BrobSign = BrobInt[byteVersion.length - 1] = BrobInt[byteVersion.length - 1] * -1;
-     return this;
-   }
-
-   public BrobInt multiply( BrobInt gint ) {
-     if (this.equals(ZERO) || gint.equals(ZERO)) {
-       return ZERO;
-    }
-    if (this.equals(ONE)) {
-        return gint;
-    } if (gint.equals(ONE)) {
-        return this;
-      }
-       if (this.byteVersion.length < gint.byteVersion.length) {
-         return gint.multiply(this);
-       }
-     int[] result = new int[this.BrobSize + gint.BrobSize];
-     result[result.length - 1] = this.BrobSign * gint.BrobSign;
-     for (int i = 0; i < gint.BrobSize; i++) {
-        for (int j = 0; j < this.BrobSize; j++) {
-           result[j + i] = result[j+i] + (this.BrobInt[j] * gint.byteVersion[i]);
-        }
-        for (int k = 0; k < result.length; k++) {
-           int temp = result[k];
-           if (result[k] > 10) {
-              result[k] = result[k] % 10;
-              result[k + 1] = result[k + 1] + temp/10;
-           }
-        }
-     }
-     return new BrobInt(result);
-  }
-
-   public BrobInt divide(BrobInt gint) {
-     int newSign = this.BrobSign * gint.BrobSign;
-     if (this.BrobSign == -1) {
-        this.signChanger();
-     }
-     if (gint.BrobSign == -1) {
-        gint.signChanger();
-     }
-     if (this.compareTo(gint) == -1) {
-        return ZERO;
-     } else if (this.equals(gint)) {
-        return ONE;
-     }
-     else {
-        int i = 2;
-        System.out.println(gint.multiply(new BrobInt(i + "")).compareTo(this));
-        while (gint.multiply(new BrobInt(i + "")).compareTo(this) < 0) {
-           System.out.println(i);
-           i++;
-        }
-        i--;
-        return new BrobInt(i + "");
-     }
-  }
-
-   public BrobInt remainder( BrobInt gint ) {
-        int k = Integer.parseInt(gint.sBrobInt);
-
-        Scanner scan = new Scanner (System.in);
-        int i = scan.nextInt();
-        while (i < 2000)
-        {
-            if (i < 2000)
-            {
-                i = scan.nextInt();
+public int compareTo( BrobInt gint ) {
+      if (this.BrobSign > gint.BrobSign) {
+         return 1;
+      } else if (this.BrobSign < gint.BrobSign) {
+         return (-1);
+      } else {
+         if (this.BrobSize > gint.BrobSize) {
+            return 1 * this.BrobSign;
+         } else if (this.BrobSize < gint.BrobSize) {
+            return -1 * this.BrobSign;
+         } else {
+            for (int i = Brob.length-2; i >= 0; i--) {
+               if (this.Brob[i] > gint.Brob[i]) {
+                  return 1 * this.BrobSign;
+               } else if (this.Brob[i] < gint.Brob[i]) {
+                  return (-1) * this.BrobSign;
+               }
             }
-        }
-        return new BrobInt(String.valueOf(k + i));
-    }
-
-
-   public boolean signChecker() {
-       if (sBrobInt.charAt(0) == '-') {
-         return true;
-       }
-       if (sBrobInt.charAt(0) == '+') {
-         return false;
-       }
-       return false;
-     }
-
-   public int compareTo( BrobInt gint ) {
-     if (gint.signChecker() == false && signChecker() == false){
-      if (intArray.length >gint.intArray.length) {
-        return 1;
-      } else if (intArray.length <gint.intArray.length) {
-        return -1;
-      } else if (intArray.length ==gint.intArray.length) {
-        for (int i = 0; i < intArray.length; i++) {
-          if (intArray[i] >gint.intArray[i]) {
-            return 1;
-          } else if (intArray[i] ==gint.intArray[i]){
             return 0;
-          } else if (intArray[i] <gint.intArray[i]) {
-            return -1;
-          }
-        }
+         }
       }
-    } else if (gint.signChecker() == true && signChecker() == true) {
-      if (intArray.length <gint.intArray.length) {
-        return 1;
-      } else if (intArray.length >gint.intArray.length) {
-        return -1;
-      } else if (intArray.length ==gint.intArray.length) {
-        for (int i = 1; i < intArray.length + 1; i++) {
-          if (intArray[i] <gint.intArray[i]) {
-            return 1;
-          } else if (intArray[i] >gint.intArray[i]) {
-            return -1;
-          } else if (intArray[i] ==gint.intArray[i]) {
-            return 0;
-          }
-        }
-      }
-    }
-    return -1;
-  }
+   }
 
-   public boolean equals( BrobInt gint ) {
-     if (sBrobInt.length() == gint.toString().length()){
-      for (int i = 0; i < sBrobInt.length(); i++) {
-        if (sBrobInt.charAt(i) != gint.toString().charAt(i)) {
-          Equals = false;
-        } else {
-          Equals = true;
-          break;
-        }
-      }
-    }
-    return Equals;
-  }
+///first few digits correct, next 3 seem to subtract by 20 or 30 recursively
 
-   public static BrobInt valueOf( long value ) throws NumberFormatException {
+public BrobInt subtractInt( BrobInt gint ) {
+  if (this.compareTo(gint) == 0) {
+      return ZERO;
+   }
+   int[] result;
+   if (this.compareTo(gint) == 1 && this.BrobSign + gint.BrobSign == 2) {
+      result = this.Brob;
+      for (int i = 0; i < gint.BrobSize; i++) {
+         if (result[i] < gint.Brob[i]) {
+            result[i] = result[i] + 10;
+            result[i+1] = result[i+1] - 1;
+         }
+         result[i] = result[i] - gint.Brob[i];
+      }
+      return new BrobInt(result);
+   } else if (this.compareTo(gint) == -1 && this.BrobSign + gint.BrobSign == 2) {
+      return gint.subtractInt(this).signCheck();
+   } else if (this.compareTo(gint) == 1 && this.BrobSign + gint.BrobSign == -2) {
+      return gint.signCheck().subtractInt(this.signCheck());
+   } else if (this.compareTo(gint) == -1 && this.BrobSign + gint.BrobSign == -2) {
+      return (this.signCheck().subtractInt(gint.signCheck())).signCheck();
+   } else if (this.BrobSign > gint.BrobSign) {
+      return this.addInt(gint.signCheck());
+   } else if (this.BrobSign < gint.BrobSign) {
+      return gint.addInt(this.signCheck());
+   }
+   return null;
+}
+
+///first three digits correct, next few seem to add by 30 or 20 recursively
+public BrobInt addInt( BrobInt gint ) {
+      int[] result;
+      if (gint.equals(ZERO)) {
+         return this;
+      }
+      if (this.BrobSize >= gint.BrobSize && this.BrobSign + gint.BrobSign != 0) {
+         result = this.Brob;
+         result[this.Brob.length-1] = this.BrobSign;
+         for (int i = 0; i < gint.BrobSize; i++) {
+            result[i] = result[i] + gint.Brob[i];
+            if (result[i] > 9) {
+               result[i] = result[i] - 10;
+               result[i+1] = result[i+1] + 1;
+            }
+         }
+         return new BrobInt(result);
+      } else if (this.compareTo(gint) == -1 && this.BrobSign + gint.BrobSign == -2) {
+         return (gint.signCheck().addInt(this.signCheck())).signCheck();
+      } else if (this.compareTo(gint) == 1 && this.BrobSign + gint.BrobSign == -2) {
+         return (this.signCheck().addInt(gint.signCheck())).signCheck();
+      }   else if (this.compareTo(gint) == -1 && this.BrobSign + gint.BrobSign == 2) {
+           return gint.addInt(this);
+      } else if (this.BrobSign < gint.BrobSign) {
+         return gint.subtractInt(this.signCheck());
+      } else if (this.BrobSign > gint.BrobSign) {
+          return this.subtractInt(gint.signCheck());
+      }
+              return null;
+}
+
+
+//first digit of each answer seems to be missing when length > 4
+//tried to debug but continued to persist
+public BrobInt multiply( BrobInt gint ) {
+          if (this.equals(ZERO)) {
+             return ZERO;
+          }
+          if (gint.equals(ZERO)) {
+              return ZERO;
+          }
+         if (this.equals(ONE)) {
+            return gint;
+         } if (gint.equals(ONE)) {
+            return this;
+         }
+         if (gint.BrobSize > this.BrobSize) {
+            return gint.multiply(this);
+         }
+         int[] result = new int[gint.BrobSize + this.BrobSize];
+         result[result.length-1] = gint.BrobSign * this.BrobSign;
+         for (int i = 0; i < gint.BrobSize; i++) {
+            for (int k = 0; k < this.BrobSize; k++) {
+               result[k+i] = result[k+i] + (this.Brob[k] * gint.Brob[i]);
+            }
+            for (int j = 0; j < result.length; j++) {
+               int temp = result[j];
+               if (result[j] > 10) {
+                  result[j] = result[j] % 10;
+                  result[j+1] = result[j+1] + temp/10;
+               }
+            }
+         }
+         return new BrobInt(result);
+}
+
+
+      /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Method to divide the value of this BrobIntk by the BrobInt passed as argument
+     *  @param  gint         BrobInt to divide this by
+     *  @return BrobInt that is the dividend of this BrobInt divided by the one passed in
+     *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+public BrobInt divide( BrobInt gint ) {
+        throw new UnsupportedOperationException( "\n         Sorry, that operation is not yet implemented." );
+}
+
+    /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *  Method to get the remainder of division of this BrobInt by the one passed as argument
+     *  @param  gint         BrobInt to divide this one by
+     *  @return BrobInt that is the remainder of division of this BrobInt by the one passed in
+     *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+public BrobInt remainder( BrobInt gint ) {
+        throw new UnsupportedOperationException( "\n         Sorry, that operation is not yet implemented." );
+}
+
+public boolean equals( Object x ) {
+        if (x instanceof BrobInt) {
+           BrobInt y = (BrobInt) x;
+           if (y.BrobSize  != this.BrobSize) {
+              return false;
+           }
+           return this.compareTo(y) == 0;
+        }
+        return false;
+}
+
+
+public static BrobInt valueOf( long gint ) throws NumberFormatException {
      BrobInt gi = null;
      try {
-        gi = new BrobInt(new Long(value).toString());
+        gi = new BrobInt(new Long(gint).toString());
      }
      catch(NumberFormatException nfe) {
-       System.out.println( "\n  Sorry, the value must be numeric of type long." );
+       System.out.println( "\n  Sorry, the gint must be numeric of type long." );
      }
      return gi;
-  }
-
-
-   public String toString() {
-     sBrobInt = "";
-    if( sign == 1 ) {
-      sBrobInt = "-";
-    } else {
-      sBrobInt = "";
-    }
-
-    for( int i = 0; i < intArray.length; i++) {
-      sBrobInt = sBrobInt + Integer.toString( intArray[i] );
-    }
-    return sBrobInt;
-  }
-
-   public void toArray( byte[] d ) {
-      System.out.println( Arrays.toString( d ) );
    }
 
-   public static void main( String[] args ) {
+public String toString() {
+     if (this.equals(ZERO)) {
+        return "0";
+     }
+     if (this.equals(ONE)) {
+        return "1";
+     }
+     String blob = "";
+     for (int i = 0; i <= Brob.length-2; i++) {
+        blob = Brob[i] + blob;
+     }
+     while (blob.charAt(0) == '0' && blob.length()-1 > 0) {
+        blob = blob.substring(1);
+     }
+     if (Brob[Brob.length-1] == -1) {
+        blob = "-" + blob;
+     }
+     return blob;
+   }
+
+public static void main( String[] args ) {
       System.out.println( "\n  Hello, world, from the BrobInt program!!\n" );
       System.out.println( "\n   You should run your tests from the BrobIntTester...\n" );
 
