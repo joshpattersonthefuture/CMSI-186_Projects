@@ -1,26 +1,20 @@
 public class Fibonacci {
-
-    private static final String usageMessage = "\n  You must enter an integer number....." +
-                                              "\n    Please try again!" +
-                                              "\n  USAGE: java Fibonacci <required_integer>\n\n";
-    private static BrobInt brob1 = new BrobInt("0");
-    private static BrobInt brob2 = BrobInt.ZERO;
-    private static BrobInt brob3 = BrobInt.ONE;
-
-    public static BrobInt Fibonacci(int value) {
-      if (value == 0 || value == 1) {
-        return BrobInt.ONE;
+   public static BrobInt Fibonacci(int x) {
+      if (x <= 2) {
+         return new BrobInt("1");
       } else {
-        for (int i = 1; i < value; i++) {
-           brob1 = brob2.addInt(brob3);
-           brob2 = brob3;
-           brob3 = brob1;
-        }
+         BrobInt brob0 = new BrobInt("0");
+         BrobInt brob1 = new BrobInt("1");
+         for (int i = 2; i < x; i++) {
+            BrobInt brob2 = brob0.addInt(brob1);
+            System.out.println(brob2);
+            brob0 = brob1;
+            brob1 = brob2;
+         }
+         return brob0.addInt(brob1);
       }
-      return brob3;
     }
-
-    public static void main( String[] args) {
-      System.out.println(Fibonacci(Integer.parseInt(args[0])));
+    public static void main(String[] args) {
+       System.out.println(Fibonacci(Integer.parseInt(args[0])));
     }
-  }
+}
